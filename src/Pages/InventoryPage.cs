@@ -12,9 +12,9 @@ public class InventoryPage : BasePage
 
     public bool IsLoaded() => Driver.FindElements(InventoryList).Count > 0;
 
-    public void AddItemToCart(string itemName) => Click(ItemButtonFor(itemName));
+    public void AddItemToCart(string itemName) => Click(By.Id($"add-to-cart-{Slug(itemName)}"));
 
-    public void RemoveItemFromCart(string itemName) => Click(ItemButtonFor(itemName));
+    public void RemoveItemFromCart(string itemName) => Click(By.Id($"remove-{Slug(itemName)}"));
 
     public int GetCartCount()
     {
@@ -28,6 +28,5 @@ public class InventoryPage : BasePage
         return new CartPage(Driver);
     }
 
-    private static By ItemButtonFor(string itemName) =>
-        By.XPath($"//div[@class='inventory_item_name' and text()='{itemName}']/ancestor::div[@class='inventory_item']//button");
+    private static string Slug(string itemName) => itemName.ToLowerInvariant().Replace(" ", "-");
 }
