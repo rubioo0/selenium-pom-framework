@@ -28,6 +28,7 @@ public abstract class TestBase
             var path = Path.Combine(ScreenshotDir, $"{TestContext.CurrentContext.Test.Name}.png");
             ((ITakesScreenshot)Driver).GetScreenshot().SaveAsFile(path);
             TestContext.WriteLine($"Screenshot saved: {path}");
+            TestContext.WriteLine(Driver.PageSource);
         }
 
         Driver.Quit();
