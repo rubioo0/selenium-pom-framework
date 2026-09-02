@@ -1,29 +1,19 @@
 using NUnit.Framework;
-using OpenQA.Selenium;
 using SeleniumPomFramework.Config;
-using SeleniumPomFramework.Drivers;
 using SeleniumPomFramework.Pages;
 
 namespace SeleniumPomFramework.Tests;
 
 [TestFixture]
-public class LoginTests
+public class LoginTests : TestBase
 {
-    private IWebDriver _driver = null!;
     private LoginPage _loginPage = null!;
 
     [SetUp]
     public void SetUp()
     {
-        _driver = DriverFactory.CreateChromeDriver();
-        _loginPage = new LoginPage(_driver);
+        _loginPage = new LoginPage(Driver);
         _loginPage.Open(TestSettings.BaseUrl);
-    }
-
-    [TearDown]
-    public void TearDown()
-    {
-        _driver.Quit();
     }
 
     [Test]
