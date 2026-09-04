@@ -28,7 +28,11 @@ public abstract class BasePage
             return element.Displayed && element.Enabled ? element : null;
         })!;
 
-    protected void Click(By locator) => WaitForClickable(locator).Click();
+    protected void Click(By locator)
+    {
+        var element = WaitForClickable(locator);
+        ((IJavaScriptExecutor)Driver).ExecuteScript("arguments[0].click();", element);
+    }
 
     protected void Type(By locator, string text)
     {
